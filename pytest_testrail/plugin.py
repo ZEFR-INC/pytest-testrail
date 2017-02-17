@@ -96,7 +96,7 @@ def get_testrail_suite_and_keys(items):
             _suite_id = clean_suite_ids(
                 item.get_marker(SUITE_PREFIX).kwargs.get('suite_id')
             )
-            if not suite_dict.has_key(_suite_id):
+            if _suite_id not in suite_dict:
                 suite_dict[_suite_id] = []
             # now get the test case numbers
             suite_dict[_suite_id].extend(
@@ -174,7 +174,7 @@ class TestRailPlugin(object):
 
     def pytest_sessionfinish(self, session, exitstatus):
         if self.use_testplan:
-            for suite, results in self.results.iteritems():
+            for suite, results in self.results.items():
                 data = {'results': results}
                 response = self.client.send_post(
                     ADD_RESULTS_URL.format(self.testrun_ids[int(suite)]),
@@ -182,7 +182,7 @@ class TestRailPlugin(object):
                     self.cert_check
                 )
 
-                for key, _ in response[0].iteritems():
+                for key, _ in response[0].items():
                     if key == 'error':
                         print('Failed to populate testrun: {}'.format(response))
                     else:
@@ -224,7 +224,7 @@ class TestRailPlugin(object):
                 'case_id': test_id,
                 'status_id': status,
             }
-            if not self.results.has_key(suite_id):
+            if suite_id not in self.results:
                 self.results[suite_id] = []
             self.results[suite_id].append(data)
 
@@ -268,11 +268,11 @@ class TestRailPlugin(object):
         }
         # add the assigned to for each section, and set include_all to false
         entries = []
-        for id, lst in suites_and_cases.iteritems():
+        for id, lst in suites_and_cases.items():
             e = {
                 "suite_id": id,
                 "assignedto_id": assign_user_id,
-                "include_all": False,
+                "include_all": True,
                 "case_ids": suites_and_cases[id],
             }
             entries.append(e)
