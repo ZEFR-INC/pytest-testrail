@@ -1,4 +1,5 @@
 import configparser
+import os
 from configparser import NoOptionError
 
 from .plugin import TestRailPlugin
@@ -31,8 +32,8 @@ def pytest_configure(config):
     if config.option.testrail:
         cfg_file = read_config_file(config.getoption("--testrail"))
         client = APIClient(cfg_file.get('API', 'url'))
-        client.user = cfg_file.get('API', 'email')
-        client.password = cfg_file.get('API', 'password', raw=True)
+        client.user = cfg_file.get('API', 'email', fallback=os.getenv('TESTRAIL_EMAIL'))
+        client.password = cfg_file.get('API', 'password', raw=True, fallback=os.getenv('TESTRAIL_PASSWORD'))
         ssl_cert_check = True
         tr_name = config.getoption('--tr_name')
 
