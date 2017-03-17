@@ -227,7 +227,7 @@ class TestRailPlugin(object):
             if suite_id not in self.results:
                 self.results[suite_id] = []
             # handle parameterized tests where a prior parameter caused the test to fail
-            if not PYTEST_TO_TESTRAIL_STATUS['failed'] in (d['status_id'] for d in self.results[suite_id]):
+            if not PYTEST_TO_TESTRAIL_STATUS['failed'] in (d['status_id'] for d in self.results[suite_id] if d['case_id'] == test_id):
                 self.results[suite_id].append(data)
 
     def create_test_run(
