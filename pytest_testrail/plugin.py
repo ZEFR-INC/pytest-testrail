@@ -272,7 +272,7 @@ class TestRailPlugin(object):
             e = {
                 "suite_id": id,
                 "assignedto_id": assign_user_id,
-                "include_all": True,
+                "include_all": False,
                 "case_ids": suites_and_cases[id],
             }
             entries.append(e)
