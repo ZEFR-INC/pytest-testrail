@@ -4,12 +4,12 @@ long_description = open("README.rst").read()
 
 setup(
     name='pytest-testrail',
-    description='pytest plugin for creating TestRail runs and adding results',
+    description='pytest plugin for creating TestRail runs & adding results',
     long_description=long_description,
-    version='0.0.13',
-    author='Allan Kilpatrick',
-    author_email='allanklp@gmail.com',
-    url='http://github.com/allankilpatrick/pytest-testrail/',
+    version='0.0.14',
+    author='Data-Test',
+    author_email='data-test@zefr.com',
+    url='https://github.com/ZEFR-INC/pytest-testrail',
     packages=[
         'pytest_testrail',
     ],
