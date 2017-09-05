@@ -50,8 +50,8 @@ deploy:
 	docker run \
 		-v $(build_loc)/.pypirc:/root/.pypirc \
 		-v $(build_loc):/app \
-		python:3.6-slim \
-		bash -c "cd /app && python setup.py bdist_wheel upload -r local"
+		python:3.6.1-slim \
+		bash -c "cd /app && python setup.py sdist upload -r local"
 
 clean:
 	rm -rf .cache .coverage .tox pytests_py*-test.xml pytest_testrail.egg-info pytest_testrail.txt pytests_coverage.xml
