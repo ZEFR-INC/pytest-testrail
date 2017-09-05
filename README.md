@@ -1,9 +1,6 @@
 pytest-testrail
 =================
 
-[![Build Status](https://travis-ci.org/dubner/pytest-testrail.svg?branch=master)](https://travis-ci.org/dubner/pytest-testrail)
-
-
 This is a pytest plugin for creating testruns based on pytest markers.
 The results of the collected tests will also be updated against the testrun in TestRail.
 
@@ -71,3 +68,19 @@ Testruns can be named using the above flag, if this is not set a generated one w
 	--no-ssl-cert-check
 
 This flag can be used prevent checking for a valid SSL certificate on TestRail host.
+
+Deploy to Artifactory(Jfrog)
+----------------------------
+
+To publish to Artifactory, an entry for each repository needs to be made in ~/.pypirc:
+Read more about [JFrog Publishing to Artifactory](https://www.jfrog.com/confluence/display/RTF/PyPI+Repositories#PyPIRepositories-PublishingtoArtifactory)
+
+Example of ~/.pypirc file:
+```
+[distutils]
+index-servers = local
+[local]
+repository: https://zefr.jfrog.io/zefr/api/pypi/pypi
+username: <jfrog username>
+password: <jfrog password>
+```
